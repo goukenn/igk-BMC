@@ -1,3 +1,3 @@
-"# BMC" 
-
-BMC document
+** BMC 
+(balafon - material - component)  
+Balafon module BMC  * 

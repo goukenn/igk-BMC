@@ -1,4 +1,8 @@
 <?php
+ 
+// desc: use to call dxsl definitoin data
+// author : C.A.D BONDJE DOUE
+// license: Balafon @ copyright 2019
 
 class BMCFormBuilderEngine extends IGKFormBuilderEngine{
 	
