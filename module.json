@@ -1,0 +1,7 @@
+{
+"module":"BMC",
+"version":"1.0",
+"author":"C.A.D BONDJE DOUE",
+"desc":"Balafon Material component",
+"init": "/.init.php"
+}

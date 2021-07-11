@@ -1,0 +1,253 @@
+<?php
+
+ 
+//define color property
+$cl["bmcButtonRaiseBackground"]="#3a64a4";
+$cl["bmcButtonRaiseColor"]="#eee";
+$cl["bmcButtonRaiseActiveBackground"]="#411";
+$cl["bmcButtonRaiseHoverBackground"]="#4b75b5";
+$cl["bmcFieldBackgroundColor"]="#ddd";
+
+// define root data
+$root["--igk-winui-bmc_fieldbgColor"] = $cl["bmcFieldBackgroundColor"];//"[cl:bmcFieldBackgroundColor]";
+$root["--igk-winui-bmc-typo"] = "'Roboto'";
+$sizes =  ["48pt", "33pt","28pt","24pt", "22pt", "18pt", "16pt", "13.4pt", "10pt"];
+for($i=1;  $i <= 9;$i++){
+	$v = igk_getv($sizes, $i-1, "10pt");
+	$root["--igk-winui-bmc-typo__headline{$i}"] = $v;
+	$def[".igk-winui-bmc-typo__headline{$i}"]= "font-size: [var:--igk-winui-bmc-typo__headline{$i}];";
+}
+$root["--igk-winui-bmc__background-color"] = "#fcfcfc";
+$def[".igk-winui-bmc-typo"] = "font-family: [var:--igk-winui-bmc-typo];";
+
+///textfield
+
+$def[".igk-winui-bmc-textfield"]  = "{sys:no-overflow} margin:20px auto; padding:4px; background-color:[var: --igk-winui-bmc_fieldbgColor];";
+$def[".igk-winui-bmc-textfield.igk-require > label:after"] = "content:'*'";
+// $def[".igk-winui-bmc-textfield > *"]  = "border:1px solid black;";
+$def[".igk-winui-bmc-textfield > select.igk-winui-bmc-field__input"] = "{sys:fit, dispb}";
+$def[".igk-winui-bmc-textfield > input.igk-winui-bmc-field__input"] = "{sys:fit, dispb}background-color:transparent !important; border:none; outline-style:none; padding: 10px; margin: 0 !important; font-size: 16pt";
+$def[".igk-winui-bmc-textfield > input.igk-winui-bmc-field__input:focus"]="";
+$def[".igk-winui-bmc-textfield > label.igk-winui-bmc-floating-label"] = "{sys:posab} top:[var:--igk-floating-label--top, 20%]; left:[var:--igk-floating-label--left, 10px]; font-size:1.1em; [trans:all 0.2s ease-in]";
+// $def[".igk-winui-bmc-textfield.focus > label.igk-winui-floating-label"]=" [transform: scale([var:--igk-textfield-scale, 1)] translate([var:--igk-textfield-end-translate, 0px, 0px)]]";
+$def[".igk-winui-bmc-textfield > input.igk-winui-bmc-field__input:focus + label.igk-winui-bmc-floating-label"]=
+$def[".igk-winui-bmc-textfield > input.igk-winui-bmc-field__input.focus:not(:focus) + label.igk-winui-bmc-floating-label"]=
+"font-size: 8pt; top: 4px; left: 4px";
+//"[transform-o: 0 0] [transform: scale(0.78, 0.78) translate([var:--igk-textfield-end-translate, -10px, -10px])]";
+//"[transform-o: 0 0] [transform: scale(0.65, 0.65) translate([var:--igk-textfield-end-translate, -10px, -10px])]";
+
+$def["div > div.igk-winui-bmc-line-ripple"]="{sys:posab , loc_b,loc_l, loc_r} height:2px; background-color:#222;";
+
+
+
+//shape
+//usage of var: properties[, valueslist]
+//usage of varp: properties[, valueslist] without replace integral
+//properties must be define some where
+
+$def[".igk-winui-bmc-shape"] = <<<EOF
+{sys:dispib, posr}
+[varp:--igk-winui-bmc-shape__corner_tl_rx: 0px] 
+[varp:--igk-winui-bmc-shape__corner_tl_ry: 0px]
+[varp:--igk-winui-bmc-shape__corner_tr_rx: 32px]
+[varp:--igk-winui-bmc-shape__corner_tr_ry: 32px]
+[varp:--igk-winui-bmc-shape__corner_bl_rx: 0px]
+[varp:--igk-winui-bmc-shape__corner_bl_ry: 0px]
+[varp:--igk-winui-bmc-shape__corner_br_rx: 0px]
+[varp:--igk-winui-bmc-shape__corner_br_ry: 0px]
+[varp:--igk-winui-bmc-shape__corner_border: 1px #ddd solid;]
+[varp:--igk-winui-bmc-shape__padding: 32px]
+[varp:--igk-winui-bmc-shape__bgcolor: #ddd]
+[varp:--igk-winui-bmc-shape__primcolor: transparent]
+[varp:--igk-winui-bmc-shape__boxmargin: 32px]
+[varp:--igk-winui-bmc-shape__corner_radius: 20px]
+border: [var:--igk-winui-bmc-shape__corner_border];
+background-color:[var:--igk-winui-bmc-shape__bgcolor];
+box-sizing: border-box;
+EOF;
+
+$def[".igk-winui-bmc-shape.round"]="border-radius:[var:--igk-winui-bmc-shape__corner_radius, 20px]; box-shadow : 0 0 4px black;".<<<EOF
+[varp:--igk-winui-bmc-shape__corner_tr_rx: 0px]
+[varp:--igk-winui-bmc-shape__corner_tr_ry: 0px]
+EOF;
+
+// igk_wln(igk_css_treat($theme, "{sys:fit} 0%{right:100%} 60%{right:0px} 100%{ right: 0px; }"));
+// igk_exit();
+
+$def[".igk-winui-bmc-shape .overlay-rectangle:hover:before"] = "{sys:posab,fit, loc_t, loc_r} opacity:0.1;  content:''; z-index:0";
+// $def[".igk-winui-bmc-shape .overlay-rectangle:before"] = "{sys:posab,fit} opacity:0.5; background-color:black; z-index:10; content:''";
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner"] = <<<EOF
+{sys:posab} background-color:[var:--igk-winui-bmc-shape__bgcolor];
+border-bottom: none;
+EOF;
+
+$def[".igk-winui-bmc-shape > div:not(.igk-winui-bmc-shape__corner)"] = "background-color:[var:--igk-winui-bmc-shape__primcolor];";
+// $def[".igk-winui-bmc-shape > div:not(.igk-winui-bmc-shape__corner]"] = "padding: [var:--igk-winui-bmc-shape__padding]; margin:[var:--igk-winui-bmc-shape__boxmargin]";
+
+// [var:--igk-winui-bmc-shape__corner_border] solid;
+$def[".igk-winui-bmc-shape ::before, .igk-winui-bmc-shape ::after"] = "box-sizing:  content-box";
+ 
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner:before"]="{sys:posab, fit} content:''; border-bottom:[var:--igk-winui-bmc-shape__corner_border]; "; 
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner:after"]= "{sys:posab, fit} content:'';  border-bottom:[var:--igk-winui-bmc-shape__corner_border];"; 
+
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner_tl"] = "left:calc([var:--igk-winui-bmc-shape__corner_tl_rx] / -2); top:calc([var:--igk-winui-bmc-shape__corner_tl_ry] / -2); width: [var:--igk-winui-bmc-shape__corner_tl_rx] ; height:[var:--igk-winui-bmc-shape__corner_tl_ry];  [transform:rotate(-45deg)]";
+// $def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner_tl"] = "left:0px; top:0px; width:0px; height:0px; border-bottom: none; [transform:rotate(-45deg)]";
+
+
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner_bl"] = "left:calc([var:--igk-winui-bmc-shape__corner_bl_rx] / -2); bottom:calc([var:--igk-winui-bmc-shape__corner_bl_ry] / -2); width: [var:--igk-winui-bmc-shape__corner_bl_rx] ; height:[var:--igk-winui-bmc-shape__corner_bl_ry]; [transform:rotate(-135deg)]";
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner_tr"] = "right:calc([var:--igk-winui-bmc-shape__corner_tr_rx] / -2); top:calc([var:--igk-winui-bmc-shape__corner_tr_ry] / -2); width: [var:--igk-winui-bmc-shape__corner_tr_rx] ; height:[var:--igk-winui-bmc-shape__corner_tr_ry];  [transform:rotate(45deg)]";
+$def[".igk-winui-bmc-shape > div.igk-winui-bmc-shape__corner_br"] = "right:calc([var:--igk-winui-bmc-shape__corner_br_rx] / -2); bottom: calc([var:--igk-winui-bmc-shape__corner_br_ry] / -2); width: [var:--igk-winui-bmc-shape__corner_br_rx] ; height:[var:--igk-winui-bmc-shape__corner_br_ry];  [transform:rotate(135deg)]";
+
+
+//
+$def["button.igk-winui-bmc-button"] = "{sys:no-outline, no-focus} font-size:inherit !important; ".<<<EOF
+[varp:--igk-winui-bmc-button__raise_bgColor:[cl:bmcButtonRaiseBackground]]
+[varp:--igk-winui-bmc-button__raise_textColor:[cl:bmcButtonRaiseColor]]
+[varp:--igk-winui-bmc-button__raise_bgActiveColor:[cl:bmcButtonRaiseActiveBackground]]
+[varp:--igk-winui-bmc-button__raise_textActiveColor:[cl:bmcButtonRaiseActiveColor]]
+[varp:--igk-winui-bmc-button__raise_bgHoverColor:[cl:bmcButtonRaiseHoverBackground]]
+[varp:--igk-winui-bmc-button__raise_textHoverColor:[cl:bmcButtonRaiseHoverColor]]
+EOF;
+$def["button.igk-winui-bmc-button.icon"] = <<<EOF
+[varp:--igk-winui-bmc-button__size:32px]
+width:[var:--igk-winui-bmc-button__size];
+height:[var:--igk-winui-bmc-button__size];
+[trans:all 0.2s ease-in]
+border-radius:50%; border:2px solid black; overflow:hidden; display:inline-block; padding:4px;
+EOF;
+$def["button.igk-winui-bmc-button:hover"]="background-color:black; color:white; border-color: #ccc";
+$def["button.igk-winui-bmc-button:hover svg"]="fill:white;";
+
+$def["button.igk-winui-bmc-button svg"]="{sys:fit}";
+$def["button.igk-winui-bmc-button.bmc-raise"] = "[trans:0.2s ease-in all]background-color: [var:--igk-winui-bmc-button__raise_bgColor]; color:[var:--igk-winui-bmc-button__raise_textColor]; box-shadow: 0px 0px 4px #444;";
+$def["button.igk-winui-bmc-button.bmc-raise:active"] = "background-color: [var:--igk-winui-bmc-button__raise_bgActiveColor]; color:[var:--igk-winui-bmc-button__raise_textActiveColor];";
+$def["button.igk-winui-bmc-button.bmc-raise:hover"] = "background-color: [var:--igk-winui-bmc-button__raise_bgHoverColor]; color:[var:--igk-winui-bmc-button__raise_textHoverColor];";
+
+
+
+
+// $theme->reg_keyFrames($def, "bmc-ripple", " to { [transform:scale(2.5)] opacity: 0; }");
+$def[".igk-winui-bmc-ripple"]= "[varp:--igk-prop-bmc-ripple__opacity: 0.5]".
+"[varp:--igk-prop-bmc-ripple__bgColor: white]".
+"background-color:[var:--igk-prop-bmc-ripple__bgColor];". 
+"opacity:[var:--igk-prop-bmc-ripple__opacity];".
+"border-radius:50%; {sys:posab, no-focus}".
+"[transform:scale(0)]";
+
+$def[".igk-bmc-anim-ripple > .igk-winui-bmc-ripple"]= "[animation: bmc-ripple 0.6s linear]";
+
+
+
+///surface
+
+$def[".igk-winui-bmc-surface"] = <<<EOF
+background-color: #F00;
+border-radius : 8px;
+padding:4px;
+margin-bottom:4px;
+color:indigo;
+[trans: all 2s ease-in]
+filter:url('#merge');
+EOF;
+
+
+$def[".igk-winui-bmc-surface:hover"] = <<<EOF
+background-color: #00F;
+EOF;
+ 
+
+//radio
+
+$root["--igk-winui-bmc-radio__size"]="16px";
+
+$def[".igk-winui-bmc-radio"]="{sys:dispib, alignm} width:[var:--igk-winui-bmc-radio__size]; height:[var:--igk-winui-bmc-radio__size]; border-radius:50%; margin:4px;";
+$def[".igk-winui-bmc-radio > input"]="{sys:posab, fit} clip:rect(0 0 0 0);  left:-20px; ";
+$def[".igk-winui-bmc-radio .radio__ripple"] = "{sys:posab, fit} [trans:all 0.2s ease-in] background-color:#444; [transform:scale(0)] border-radius:50%; opacity:0.2; ";
+$def[".igk-winui-bmc-radio:hover .radio__ripple"] =
+$def[".igk-winui-bmc-radio > input:active + .radio__ripple"] =
+$def[".igk-winui-bmc-radio > input:focus + .radio__ripple"] =
+ "[transform:scale(1.5)] border-radius:50%; opacity:0.2; ";
+$def[".igk-winui-bmc-radio > input:active + .radio__ripple"] = "[transform:scale(1.5)] background-color:red !important";
+$def[".igk-winui-bmc-radio > input + .radio__ripple + .radio__select"]= " [trans:all 0.2s ease-in] {sys:fit} border-radius:50%; top:50%; left:50%; [transform:translate(-50%,-50%) scale(0) ] background-color: indigo; ";
+$def[".igk-winui-bmc-radio > input:checked + .radio__ripple + .radio__select"]= "[transform: translate(-50%,-50%) scale(0.5) ]";
+$def[".igk-winui-bmc-radio .radio__outline"]= "{sys:fit , posab, loc_t} border-radius:50%; border:2px solid indigo;";
+
+
+$root["--igk-winui-bmc-checkbox__size"] = "16px";
+
+//checkbox
+$def[".igk-winui-bmc-checkbox"]="{sys:dispib, alignm} width:[var:--igk-winui-bmc-checkbox__size]; height:[var:--igk-winui-bmc-checkbox__size]; border-radius:50%; margin:4px;";
+$def[".igk-winui-bmc-checkbox > input"]="{sys:posab, fit} clip:rect(0 0 0 0);  left:-20px; ";
+$def[".igk-winui-bmc-checkbox .checkbox__ripple"] = "{sys:posab, fit} [trans:all 0.2s ease-in] background-color:#444; [transform:scale(0)] border-radius:4px; opacity:0.2; ";
+$def[".igk-winui-bmc-checkbox:hover .checkbox__ripple"] =
+$def[".igk-winui-bmc-checkbox > input:active + .checkbox__ripple"] =
+$def[".igk-winui-bmc-checkbox > input:focus + .checkbox__ripple"] =
+ "[transform:scale(1.5)] border-radius:4px; opacity:0.2; ";
+$def[".igk-winui-bmc-checkbox > input:active + .checkbox__ripple"] = "[transform:scale(1.5)] background-color:red !important;";
+$def[".igk-winui-bmc-checkbox > input + .checkbox__ripple + .checkbox__select"]= " [trans:all 0.2s ease-in] {sys:fit} border-radius:4px; top:50%; left:50%; [transform:translate(-50%,-50%) scale(0) ] background-color: indigo; ";
+$def[".igk-winui-bmc-checkbox > input:checked + .checkbox__ripple + .checkbox__select"]= "[transform: translate(-50%,-50%) scale(0.5) ]";
+$def[".igk-winui-bmc-checkbox .checkbox__outline"]= "{sys:fit , posab, loc_t} border-radius:[var:--igk-winui-bmc-checkbox__border_radius, 4px]; border:2px solid indigo; ";
+
+
+
+
+//igk-winui-bmc-textsearchfield 
+$def[".igk-winui-bmc-textsearchfield"] = "{sys:dispib, no-overflow} padding-left:2em; ";
+$def[".igk-winui-bmc-textsearchfield > .igk-winui-bmc-field__input"] = "{sys:no-border, no-outline} background-color: transparent; opacity : 0.0; width:0px; padding:0px; [trans:0.2s width ease-in,  0.9s opacity ease-in]";
+$def[".igk-winui-bmc-textsearchfield > .igk-winui-bmc-field__input:focus"] = 
+$def[".igk-winui-bmc-textsearchfield.igk-show > .igk-winui-bmc-field__input"] = 
+"opacity: 1; width:[var:--igk-winui-bmc-textsearchfield__width,200px]; margin-right:4px;";
+$def[".igk-winui-bmc-textsearchfield > label svg:focus"] = "fill:red";
+
+
+$root["--igk-winui-bmc-textsearchfield__offset"] = "";
+
+
+$def[".igk-winui-bmc-textsearchfield .logo"] = "{sys:posab, loc_l} [transform:translate(0, -50%)] top:50%; height:1em; left:0.5em; width:1em; cursor:pointer;";
+$def[".igk-winui-bmc-textsearchfield .logo > svg"] = "{sys:posab, fit}";
+$def[".igk-winui-bmc-textsearchfield .logo:after"] = "";//content:''; {sys:disptable} clear:both;";
+
+
+// search field line ripple
+
+$def[".igk-winui-bmc-textsearchfield .igk-winui-bmc-line-ripple"] = "{sys:posab, loc_b, loc_r, loc_l} height:4px; background-color:[var:--igk-winui-bmc-line-ripple__background,#444];";
+$def[".igk-winui-bmc-textsearchfield .igk-winui-bmc-line-ripple:before, .igk-winui-bmc-textsearchfield .igk-winui-bmc-line-ripple:after"]="{sys:posab, loc_b} background-color:[var:--igk-winui-bmc-line-ripple__background,#444]; height:8px; width:4px; content:''";
+$def[".igk-winui-bmc-textsearchfield .igk-winui-bmc-line-ripple:before"] = "{sys: loc_l} content:''; ";
+$def[".igk-winui-bmc-textsearchfield .igk-winui-bmc-line-ripple:after"] = "{sys:loc_r} content:''; ";
+
+
+
+$def[".igk-winui-bmc-textsearchfield.igk-pull-right .logo"]="right:0.5em; left:auto;[transform: translate(0, -50%) ]";
+$def[".igk-winui-bmc-textsearchfield.igk-pull-right"]="padding-left:8px; padding-right:1.3em;";
+
+
+
+///combobox
+$def[".igk-winui-bmc-textfield.combobox select"]  = "background-color:transparent; outline-style:none !important; border:none; padding: 0px; margin:0px; font-size:[var:--igk-winui-bmc-textfield__font-size, 1.0em] ";
+$def[".igk-winui-bmc-textfield.combobox select:focus"]  = "outline:0; outline-style:none !important; outline-color:red;";
+
+
+$def[".igk-winui-bmc-textarea"] = "{sys:no-overflow} padding:10px; background-color:[var:--igk-winui-bmc_fieldbgColor, indigo];";
+$def[".igk-winui-bmc-textarea textarea"]= "{sys:no-border}; background-color:transparent;";
+
+
+$def[".igk-bmc-form-group .igk-winui-bmc-textarea textarea"]  = "{sys:dispb, fitw} min-height:200px;";
+
+// ie service management
+//$def["body.ie-11-service .igk-winui-bmc-floating-label"] = "{sys:dispn}";
+
+
+//
+$def[".igk-winui-bmc-roundtool"] ="{sys:dispb} top : 32px; background-color:white; border:none; margin-bottom:10px; box-shadow: 0 0 10px -4px black; border-radius: 1.1em;  overflow:hidden;";
+
+$def[".igk-winui-bmc-roundtool ul"] = "{sys:dispib, fitw} [trans:all 0.2s] border-radius: inherit; overflow: inherit; border:none; ";
+$def[".igk-winui-bmc-roundtool ul li > a.igk-svg-host"] = "{sys:dispib}  width: 2.2em; padding:8px; line-height:0;";
+$def[".igk-winui-bmc-roundtool ul.igk-hide li:not(.drop)"] = "{sys:dispn}"; // > a.igk-svg-host"] = "{sys:dispib}  width: 2.2em; padding:8px; line-height:0;";
+$def[".igk-winui-bmc-roundtool ul li > a.igk-svg-host > svg"] = "{sys:fit}";
+$def[".igk-winui-bmc-roundtool ul > li"] = "{sys:dispb}";
+$def[".igk-winui-bmc-roundtool ul > li:hover "] = "background-color:#444";
+$def[".igk-winui-bmc-roundtool ul > li:hover > a.igk-svg-host:hover > svg"] = "fill: #eee;";
+
+
+
+$def[".igk-col > .igk-winui-bmc-textfield:first-child:last-child"] = "margin:auto;";

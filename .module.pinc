@@ -1,0 +1,10 @@
+<?php
+
+$reg("initdoc", function($doc, $setting=null){
+	 
+	$this->setCurrentDoc($doc);
+	igk_ctrl_bind_css_file($this, null);
+	$js = igk_io_dir($this->getScriptDir()."/bmc.js"); 
+	$doc->addTempScript($js)->activate("defer");
+ 
+});
